@@ -1,54 +1,50 @@
-# 🫀 Heart Disease Prediction
+# Heart Disease Prediction
 
-An end-to-end machine learning project that predicts a patient's risk of heart disease based on clinical attributes such as age, cholesterol, blood pressure, and chest pain type. Built from raw data all the way to a live, interactive web app.
+This is a machine learning project to predict whether a patient is at risk of heart disease based on clinical data like age, cholesterol, blood pressure, and chest pain type. It covers the full process from raw data to a deployed web app.
 
-🔗 **Live App:** [heart-disease-prediction-abhi.streamlit.app](https://heart-disease-prediction-abhi.streamlit.app/)
+Live app: [Heart Disease Prediction](https://heart-disease-prediction-abhi.streamlit.app/)
 
----
+## About the project
 
-## 📌 Overview
+Heart disease is one of the most common causes of death, and predicting risk early can help with timely treatment. This project uses patient data from the UCI Heart Disease dataset to build a model that classifies whether someone is likely to have heart disease.
 
-Heart disease is one of the leading causes of death worldwide, and early risk assessment can help guide timely medical attention. This project uses patient clinical data to classify whether a person is likely at risk of heart disease, using a full ML pipeline — data cleaning, exploratory analysis, model comparison, explainability, and deployment.
+## Dataset
 
-## 📊 Dataset
+The UCI Heart Disease dataset, combined from four sources: Cleveland, Hungary, Switzerland, and VA Long Beach. In total it has 920 patient records and 15 clinical attributes.
 
-UCI Heart Disease dataset — combined from **4 hospital sources**: Cleveland, Hungary, Switzerland, and VA Long Beach (920 patient records, 15 clinical attributes).
+While exploring the data, I found that three columns (ca, slope, thal) had almost no data outside the Cleveland source (around 99% missing). This wasn't random - those hospitals just didn't record those particular tests. Because of this, I dropped those three columns instead of imputing them, since filling in values the other hospitals never measured would have biased the model toward Cleveland patterns.
 
-A key finding during EDA: three features (`ca`, `slope`, `thal`) were missing in ~99% of records outside the Cleveland source — a **data collection artifact**, not random missingness. These were dropped to avoid biasing the model toward Cleveland-only patterns.
+## Steps followed
 
-## 🧠 Approach
+1. Exploratory data analysis - looked at missing values, how they differed by source, and how features relate to the target.
+2. Data cleaning - handled missing values (median for numeric columns, mode for categorical ones), encoded categorical features, and converted the target into a binary disease/no-disease label.
+3. Model training - trained and compared four models: Logistic Regression, Decision Tree, KNN, and Random Forest. Compared them using accuracy, precision, recall, and F1-score.
+4. Explainability - looked at feature coefficients to see which factors mattered most for predictions.
+5. Deployment - built a Streamlit app so anyone can enter patient details and get a prediction.
 
-1. **Exploratory Data Analysis** — examined missingness patterns across sources, target distribution, and feature relationships with disease presence.
-2. **Preprocessing** — imputed remaining missing values (median for numeric, mode for categorical), label-encoded categorical features, and binarized the target (disease present / not present).
-3. **Modeling** — trained and compared four models: Logistic Regression, Decision Tree, KNN, and Random Forest — evaluated on accuracy, precision, recall, and F1-score.
-4. **Explainability** — analyzed feature coefficients to understand which clinical factors most influence predictions.
-5. **Deployment** — built and deployed an interactive Streamlit app so anyone can input patient data and get an instant prediction.
+## Best model
 
-## 🏆 Best Model
+Logistic Regression performed best based on F1-score. Full comparison is in notebooks/03_modeling.ipynb.
 
-**Logistic Regression** — selected based on F1-score comparison across all four models (see `notebooks/03_modeling.ipynb` for full results and comparison table).
+## Project structure
 
-## 📁 Project Structure
-
-
-## ⚙️ Run Locally
+## Running it locally
 
 ```bash
 git clone https://github.com/abhishekyadav59859/heart-disease-prediction.git
 cd heart-disease-prediction
 pip install -r requirements.txt
 streamlit run app/app.py
-```
 
-## 🛠️ Tech Stack
+## Tech used
 
-Python · pandas · scikit-learn · Streamlit · matplotlib
+Python, pandas, scikit-learn, Streamlit, matplotlib
 
-## 👤 Author
+## Author
 
-**Abhishek Yadav**
+Abhishek Yadav
 B.Tech, Mathematics and Computing, NIT Mizoram
 
-## 📄 License
+## Note
 
-This project is for educational purposes.
+This project is for learning purposes and is not meant for actual medical diagnosis.
